@@ -1,125 +1,242 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookHub • Black Corp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>BOOKHUB • Black Corp</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 
   <style>
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
     }
 
     body{
+      width:100%;
       height:100vh;
-      background:#050505;
       overflow:hidden;
+      background:#050505;
+      font-family:'Orbitron', sans-serif;
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:center;
       position:relative;
       color:white;
     }
 
-    /* Glow Background */
-    body::before{
-      content:"";
+    /* Partículas */
+
+    .particles{
       position:absolute;
-      width:600px;
-      height:600px;
-      background:radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      z-index:1;
+    }
+
+    .particles span{
+      position:absolute;
+      display:block;
+      width:2px;
+      height:2px;
+      background:#ffb300;
+      border-radius:50%;
+      opacity:0.2;
+      animation:float linear infinite;
+    }
+
+    @keyframes float{
+      from{
+        transform:translateY(100vh);
+      }
+
+      to{
+        transform:translateY(-10vh);
+      }
+    }
+
+    /* Glow Central */
+
+    .glow{
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle,
+      rgba(255,179,0,0.25) 0%,
+      rgba(255,179,0,0.08) 35%,
+      transparent 70%);
       filter:blur(40px);
-      animation:pulse 5s infinite ease-in-out;
+      animation:pulse 5s ease-in-out infinite;
+      z-index:0;
     }
 
     @keyframes pulse{
-      0%{ transform:scale(1);}
-      50%{ transform:scale(1.15);}
-      100%{ transform:scale(1);}
+      0%,100%{
+        transform:scale(1);
+      }
+
+      50%{
+        transform:scale(1.1);
+      }
     }
+
+    /* Container */
 
     .container{
       position:relative;
       z-index:2;
       width:90%;
-      max-width:400px;
+      max-width:420px;
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:20px;
     }
+
+    /* Logo */
 
     .logo{
-      margin-bottom:30px;
-      text-align:center;
+      width:170px;
+      margin-bottom:25px;
+      animation:logoFloat 4s ease-in-out infinite;
+      filter:
+      drop-shadow(0 0 15px rgba(255,179,0,0.3))
+      drop-shadow(0 0 30px rgba(255,179,0,0.15));
     }
 
-    .logo h1{
-      font-size:2.3rem;
-      letter-spacing:5px;
+    @keyframes logoFloat{
+      0%,100%{
+        transform:translateY(0px);
+      }
+
+      50%{
+        transform:translateY(-6px);
+      }
+    }
+
+    /* Título */
+
+    .title{
+      font-size:2.4rem;
       font-weight:900;
+      letter-spacing:5px;
+      margin-bottom:8px;
+      text-shadow:
+      0 0 12px rgba(255,179,0,0.4);
     }
 
-    .logo span{
-      color:#8f8f8f;
-      font-size:0.85rem;
-      letter-spacing:4px;
-      display:block;
-      margin-top:6px;
+    .subtitle{
+      color:#9f9f9f;
+      font-size:0.72rem;
+      letter-spacing:3px;
+      margin-bottom:40px;
     }
 
-    .btn{
+    /* Botões */
+
+    .button{
       width:100%;
       text-decoration:none;
       color:white;
+      margin-bottom:18px;
       padding:18px;
-      border:1px solid rgba(255,255,255,0.12);
-      border-radius:18px;
-      background:rgba(255,255,255,0.05);
-      backdrop-filter:blur(10px);
-      text-align:center;
-      font-weight:700;
-      letter-spacing:1px;
-      transition:0.3s ease;
       position:relative;
       overflow:hidden;
+
+      border:
+      1px solid rgba(255,179,0,0.25);
+
+      background:
+      linear-gradient(
+      180deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.02));
+
+      backdrop-filter:blur(10px);
+
+      border-radius:14px;
+
+      text-align:center;
+
+      letter-spacing:2px;
+      font-size:0.85rem;
+      font-weight:700;
+
+      transition:0.35s ease;
     }
 
-    .btn:hover{
+    .button:hover{
       transform:translateY(-4px) scale(1.02);
-      border-color:white;
-      background:rgba(255,255,255,0.1);
-      box-shadow:0 0 25px rgba(255,255,255,0.15);
+
+      border-color:#ffb300;
+
+      box-shadow:
+      0 0 25px rgba(255,179,0,0.18),
+      inset 0 0 12px rgba(255,179,0,0.08);
+
+      background:
+      linear-gradient(
+      180deg,
+      rgba(255,179,0,0.12),
+      rgba(255,255,255,0.03));
     }
 
-    .btn::before{
+    /* Scanner */
+
+    .button::before{
       content:"";
       position:absolute;
       top:0;
-      left:-100%;
-      width:100%;
+      left:-120%;
+      width:60%;
       height:100%;
-      background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.15),
-        transparent
-      );
-      transition:0.6s;
+
+      background:
+      linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.18),
+      transparent);
+
+      transform:skewX(-20deg);
+
+      transition:0.7s;
     }
 
-    .btn:hover::before{
-      left:100%;
+    .button:hover::before{
+      left:140%;
     }
+
+    /* Símbolo Black Corp */
+
+    .corp{
+      position:absolute;
+      bottom:20px;
+      right:20px;
+      width:26px;
+      opacity:0.18;
+      transition:0.4s;
+      filter:drop-shadow(0 0 8px #d2ff00);
+    }
+
+    .corp:hover{
+      opacity:0.6;
+      transform:scale(1.1);
+    }
+
+    /* Footer */
 
     .footer{
       margin-top:20px;
-      font-size:0.72rem;
-      opacity:0.4;
-      letter-spacing:2px;
+      font-size:0.6rem;
+      letter-spacing:4px;
+      color:#5a5a5a;
     }
 
   </style>
@@ -127,18 +244,56 @@
 
 <body>
 
+  <!-- Partículas -->
+
+  <div class="particles">
+
+    <span style="left:10%; animation-duration:12s;"></span>
+    <span style="left:20%; animation-duration:18s;"></span>
+    <span style="left:35%; animation-duration:14s;"></span>
+    <span style="left:50%; animation-duration:20s;"></span>
+    <span style="left:65%; animation-duration:16s;"></span>
+    <span style="left:75%; animation-duration:12s;"></span>
+    <span style="left:90%; animation-duration:22s;"></span>
+
+  </div>
+
+  <!-- Glow -->
+
+  <div class="glow"></div>
+
+  <!-- Conteúdo -->
+
   <div class="container">
 
-    <div class="logo">
-      <h1>BOOKHUB</h1>
-      <span>BLACK CORP</span>
+    <!-- LOGO -->
+    <!-- Troque o src pela URL da sua logo -->
+
+    <img
+      class="logo"
+      src="https://i.imgur.com/tVOT5xK.png"
+      alt="BookHub Logo"
+    >
+
+    <div class="title">BOOKHUB</div>
+
+    <div class="subtitle">
+      POWERED BY BLACK CORP
     </div>
 
-    <a href="#" class="btn">TESTE 01</a>
+    <!-- BOTÕES -->
 
-    <a href="#" class="btn">TESTE 02</a>
+    <a href="#" class="button">
+      ACESSAR BIBLIOTECA
+    </a>
 
-    <a href="#" class="btn">TESTE 03</a>
+    <a href="#" class="button">
+      ENTRAR NO TELEGRAM
+    </a>
+
+    <a href="#" class="button">
+      DESBLOQUEAR ACESSO
+    </a>
 
     <div class="footer">
       IBRS ECOSYSTEM
@@ -146,5 +301,15 @@
 
   </div>
 
+  <!-- Easter Egg Black Corp -->
+  <!-- Troque pela sua logo verde -->
+
+  <img
+    class="corp"
+    src="https://i.imgur.com/gk6C8pA.png"
+    alt="Black Corp"
+  >
+
 </body>
 </html>
+```
