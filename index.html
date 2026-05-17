@@ -1,14 +1,14 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>BOOKHUB • Black Corp</title>
 
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
 
@@ -18,298 +18,501 @@
       box-sizing:border-box;
     }
 
+    :root{
+      --gold:#ffb400;
+      --gold-soft:#ffcc48;
+      --bg:#040404;
+      --line:#382600;
+      --white:#f5f5f5;
+
+      /* COR OFICIAL DO SMILE */
+      --brand:#d7ff00;
+    }
+
     body{
-      width:100%;
-      height:100vh;
-      overflow:hidden;
-      background:#050505;
-      font-family:'Orbitron', sans-serif;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      position:relative;
+      font-family:'Orbitron',sans-serif;
+      background: radial-gradient(circle at top, #111 0%, #050505 45%, #000 100%);
+      min-height:100vh;
+      overflow-x:hidden;
       color:white;
+      position:relative;
     }
 
-    /* Partículas */
-
-    .particles{
-      position:absolute;
-      width:100%;
-      height:100%;
-      overflow:hidden;
-      z-index:1;
+    /* GRID FUTURISTA */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+      linear-gradient(rgba(255,180,0,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,180,0,.04) 1px, transparent 1px);
+      background-size:60px 60px;
+      pointer-events:none;
+      opacity:.25;
     }
 
-    .particles span{
-      position:absolute;
-      display:block;
-      width:2px;
-      height:2px;
-      background:#ffb300;
-      border-radius:50%;
-      opacity:0.2;
-      animation:float linear infinite;
+    /* PARTÍCULAS */
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:
+      radial-gradient(circle, rgba(255,180,0,.8) 1px, transparent 1px);
+      background-size:120px 120px;
+      opacity:.15;
+      animation: float 14s linear infinite;
+      pointer-events:none;
     }
 
     @keyframes float{
       from{
-        transform:translateY(100vh);
+        transform:translateY(0px);
       }
-
       to{
-        transform:translateY(-10vh);
+        transform:translateY(-120px);
       }
     }
 
-    /* Glow Central */
+    .corner{
+      position:fixed;
+      width:70px;
+      height:70px;
+      border:2px solid rgba(255,180,0,.4);
+      z-index:2;
+      opacity:.7;
+    }
 
-    .glow{
+    .tl{
+      top:25px;
+      left:25px;
+      border-right:none;
+      border-bottom:none;
+    }
+
+    .tr{
+      top:25px;
+      right:25px;
+      border-left:none;
+      border-bottom:none;
+    }
+
+    .bl{
+      bottom:25px;
+      left:25px;
+      border-right:none;
+      border-top:none;
+    }
+
+    .br{
+      bottom:25px;
+      right:25px;
+      border-left:none;
+      border-top:none;
+    }
+
+    .container{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+      position:relative;
+      z-index:5;
+    }
+
+    .content{
+      width:100%;
+      max-width:820px;
+      text-align:center;
+    }
+
+    /* LOGO */
+    .logo-wrap{
+      position:relative;
+      width:240px;
+      height:240px;
+      margin:0 auto 30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .logo-ring{
       position:absolute;
-      width:500px;
-      height:500px;
-      background:radial-gradient(circle,
-      rgba(255,179,0,0.25) 0%,
-      rgba(255,179,0,0.08) 35%,
-      transparent 70%);
-      filter:blur(40px);
-      animation:pulse 5s ease-in-out infinite;
-      z-index:0;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      border:3px solid var(--gold);
+      box-shadow:
+      0 0 10px var(--gold),
+      0 0 30px rgba(255,180,0,.7),
+      inset 0 0 20px rgba(255,180,0,.4);
+      animation:pulse 3s infinite ease-in-out;
+    }
+
+    .logo-ring::before{
+      content:'';
+      position:absolute;
+      inset:-12px;
+      border-radius:50%;
+      border:1px solid rgba(255,180,0,.25);
     }
 
     @keyframes pulse{
       0%,100%{
         transform:scale(1);
       }
-
       50%{
-        transform:scale(1.1);
+        transform:scale(1.03);
       }
     }
 
-    /* Container */
-
-    .container{
-      position:relative;
-      z-index:2;
-      width:90%;
-      max-width:420px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
-
-    /* Logo */
-
-    .logo{
-      width:170px;
-      margin-bottom:25px;
-      animation:logoFloat 4s ease-in-out infinite;
+    .book{
+      width:120px;
       filter:
-      drop-shadow(0 0 15px rgba(255,179,0,0.3))
-      drop-shadow(0 0 30px rgba(255,179,0,0.15));
+      drop-shadow(0 0 10px rgba(255,180,0,.6))
+      drop-shadow(0 0 30px rgba(255,180,0,.4));
     }
 
-    @keyframes logoFloat{
-      0%,100%{
-        transform:translateY(0px);
-      }
-
-      50%{
-        transform:translateY(-6px);
-      }
+    .brand-smile{
+      position:absolute;
+      width:42px;
+      bottom:62px;
+      right:66px;
+      filter:
+      drop-shadow(0 0 8px rgba(215,255,0,.8))
+      drop-shadow(0 0 20px rgba(215,255,0,.5));
     }
 
-    /* Título */
-
-    .title{
-      font-size:2.4rem;
-      font-weight:900;
-      letter-spacing:5px;
-      margin-bottom:8px;
+    h1{
+      font-size:5rem;
+      letter-spacing:12px;
+      color:#fff;
+      margin-bottom:10px;
       text-shadow:
-      0 0 12px rgba(255,179,0,0.4);
+      0 0 10px rgba(255,255,255,.6),
+      0 0 25px rgba(255,180,0,.5);
     }
 
     .subtitle{
-      color:#9f9f9f;
-      font-size:0.72rem;
-      letter-spacing:3px;
-      margin-bottom:40px;
+      color:#cfcfcf;
+      letter-spacing:8px;
+      font-size:1rem;
+      margin-bottom:55px;
     }
 
-    /* Botões */
+    .subtitle span{
+      color:var(--gold);
+    }
 
-    .button{
+    .buttons{
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+    }
+
+    .btn{
       width:100%;
-      text-decoration:none;
+      padding:32px 38px;
+      background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,180,0,.35);
       color:white;
-      margin-bottom:18px;
-      padding:18px;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       position:relative;
       overflow:hidden;
-
-      border:
-      1px solid rgba(255,179,0,0.25);
-
-      background:
-      linear-gradient(
-      180deg,
-      rgba(255,255,255,0.04),
-      rgba(255,255,255,0.02));
-
-      backdrop-filter:blur(10px);
-
-      border-radius:14px;
-
-      text-align:center;
-
-      letter-spacing:2px;
-      font-size:0.85rem;
-      font-weight:700;
-
-      transition:0.35s ease;
+      clip-path:polygon(
+      18px 0,
+      calc(100% - 18px) 0,
+      100% 18px,
+      100% calc(100% - 18px),
+      calc(100% - 18px) 100%,
+      18px 100%,
+      0 calc(100% - 18px),
+      0 18px
+      );
+      transition:.35s;
+      backdrop-filter:blur(6px);
     }
 
-    .button:hover{
-      transform:translateY(-4px) scale(1.02);
-
-      border-color:#ffb300;
-
-      box-shadow:
-      0 0 25px rgba(255,179,0,0.18),
-      inset 0 0 12px rgba(255,179,0,0.08);
-
-      background:
-      linear-gradient(
-      180deg,
-      rgba(255,179,0,0.12),
-      rgba(255,255,255,0.03));
-    }
-
-    /* Scanner */
-
-    .button::before{
-      content:"";
+    .btn::before{
+      content:'';
       position:absolute;
       top:0;
       left:-120%;
-      width:60%;
+      width:100%;
       height:100%;
-
-      background:
-      linear-gradient(
+      background:linear-gradient(
       90deg,
       transparent,
-      rgba(255,255,255,0.18),
-      transparent);
-
-      transform:skewX(-20deg);
-
-      transition:0.7s;
+      rgba(255,180,0,.15),
+      transparent
+      );
+      transition:.7s;
     }
 
-    .button:hover::before{
-      left:140%;
+    .btn:hover::before{
+      left:120%;
     }
 
-    /* Símbolo Black Corp */
-
-    .corp{
-      position:absolute;
-      bottom:20px;
-      right:20px;
-      width:26px;
-      opacity:0.18;
-      transition:0.4s;
-      filter:drop-shadow(0 0 8px #d2ff00);
+    .btn:hover{
+      transform:translateY(-4px) scale(1.01);
+      border-color:var(--gold);
+      box-shadow:
+      0 0 20px rgba(255,180,0,.25),
+      0 0 45px rgba(255,180,0,.12);
     }
 
-    .corp:hover{
-      opacity:0.6;
-      transform:scale(1.1);
+    .btn-left{
+      display:flex;
+      align-items:center;
+      gap:26px;
     }
 
-    /* Footer */
+    .icon{
+      width:34px;
+      height:34px;
+      color:var(--gold);
+      flex-shrink:0;
+    }
+
+    .divider{
+      width:1px;
+      height:44px;
+      background:rgba(255,180,0,.18);
+    }
+
+    .btn-text{
+      font-size:1.3rem;
+      letter-spacing:7px;
+      font-weight:500;
+    }
+
+    .arrow{
+      font-size:2rem;
+      color:var(--gold);
+      transition:.3s;
+    }
+
+    .btn:hover .arrow{
+      transform:translateX(8px);
+    }
 
     .footer{
-      margin-top:20px;
-      font-size:0.6rem;
-      letter-spacing:4px;
-      color:#5a5a5a;
+      margin-top:55px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+      opacity:.9;
+    }
+
+    .footer p{
+      letter-spacing:8px;
+      color:var(--gold);
+      font-size:.95rem;
+    }
+
+    .footer img{
+      width:32px;
+      filter:
+      drop-shadow(0 0 8px rgba(215,255,0,.7));
+    }
+
+    /* MOBILE */
+    @media(max-width:768px){
+
+      h1{
+        font-size:2.9rem;
+        letter-spacing:6px;
+      }
+
+      .subtitle{
+        font-size:.75rem;
+        letter-spacing:4px;
+      }
+
+      .btn{
+        padding:24px 22px;
+      }
+
+      .btn-text{
+        font-size:.95rem;
+        letter-spacing:4px;
+      }
+
+      .logo-wrap{
+        width:190px;
+        height:190px;
+      }
+
+      .book{
+        width:100px;
+      }
+
+      .brand-smile{
+        width:34px;
+        bottom:49px;
+        right:54px;
+      }
+
+      .divider{
+        display:none;
+      }
+
+      .btn-left{
+        gap:18px;
+      }
+
     }
 
   </style>
 </head>
-
 <body>
 
-  <!-- Partículas -->
+  <!-- BORDAS -->
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
 
-  <div class="particles">
+  <main class="container">
 
-    <span style="left:10%; animation-duration:12s;"></span>
-    <span style="left:20%; animation-duration:18s;"></span>
-    <span style="left:35%; animation-duration:14s;"></span>
-    <span style="left:50%; animation-duration:20s;"></span>
-    <span style="left:65%; animation-duration:16s;"></span>
-    <span style="left:75%; animation-duration:12s;"></span>
-    <span style="left:90%; animation-duration:22s;"></span>
+    <section class="content">
 
-  </div>
+      <!-- LOGO -->
+      <div class="logo-wrap">
 
-  <!-- Glow -->
+        <div class="logo-ring"></div>
 
-  <div class="glow"></div>
+        <!-- LIVRO -->
+        <svg class="book" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-  <!-- Conteúdo -->
+          <path d="M140 110L255 145V400L140 365V110Z"
+          stroke="#ffb400"
+          stroke-width="12"/>
 
-  <div class="container">
+          <path d="M372 110L257 145V400L372 365V110Z"
+          stroke="#ffb400"
+          stroke-width="12"/>
 
-    <!-- LOGO -->
-    <!-- Troque o src pela URL da sua logo -->
+          <path d="M255 145C255 145 215 110 140 110"
+          stroke="#ffcc48"
+          stroke-width="12"/>
 
-    <img
-      class="logo"
-      src="https://i.imgur.com/tVOT5xK.png"
-      alt="BookHub Logo"
-    >
+          <path d="M257 145C257 145 297 110 372 110"
+          stroke="#ffcc48"
+          stroke-width="12"/>
 
-    <div class="title">BOOKHUB</div>
+          <path d="M255 145V400"
+          stroke="#ffcc48"
+          stroke-width="12"/>
 
-    <div class="subtitle">
-      POWERED BY BLACK CORP
-    </div>
+        </svg>
 
-    <!-- BOTÕES -->
+        <!-- SMILE MARCA -->
+        <img
+          src="smile.png"
+          class="brand-smile"
+          alt="Black Corp Symbol"
+        >
 
-    <a href="#" class="button">
-      ACESSAR BIBLIOTECA
-    </a>
+      </div>
 
-    <a href="#" class="button">
-      ENTRAR NO TELEGRAM
-    </a>
+      <!-- TITULO -->
+      <h1>BOOKHUB</h1>
 
-    <a href="#" class="button">
-      DESBLOQUEAR ACESSO
-    </a>
+      <div class="subtitle">
+        POWERED BY <span>BLACK CORP</span>
+      </div>
 
-    <div class="footer">
-      IBRS ECOSYSTEM
-    </div>
+      <!-- BOTÕES -->
+      <div class="buttons">
 
-  </div>
+        <a href="#" class="btn">
 
-  <!-- Easter Egg Black Corp -->
-  <!-- Troque pela sua logo verde -->
+          <div class="btn-left">
 
-  <img
-    class="corp"
-    src="https://i.imgur.com/gk6C8pA.png"
-    alt="Black Corp"
-  >
+            <!-- ICON -->
+            <svg class="icon" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+            </svg>
+
+            <div class="divider"></div>
+
+            <div class="btn-text">
+              ACESSAR BIBLIOTECA
+            </div>
+
+          </div>
+
+          <div class="arrow">›</div>
+
+        </a>
+
+        <a href="#" class="btn">
+
+          <div class="btn-left">
+
+            <svg class="icon" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+              <path d="M22 2L11 13"/>
+              <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+            </svg>
+
+            <div class="divider"></div>
+
+            <div class="btn-text">
+              ENTRAR NO TELEGRAM
+            </div>
+
+          </div>
+
+          <div class="arrow">›</div>
+
+        </a>
+
+        <a href="#" class="btn">
+
+          <div class="btn-left">
+
+            <svg class="icon" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+              <rect x="5" y="11" width="14" height="10" rx="2"/>
+              <path d="M8 11V7a4 4 0 118 0v4"/>
+            </svg>
+
+            <div class="divider"></div>
+
+            <div class="btn-text">
+              DESBLOQUEAR ACESSO
+            </div>
+
+          </div>
+
+          <div class="arrow">›</div>
+
+        </a>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+
+        <p>IBRS ECOSYSTEM</p>
+
+        <img src="smile.png" alt="Black Corp">
+
+      </div>
+
+    </section>
+
+  </main>
 
 </body>
 </html>
-```
